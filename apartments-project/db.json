@@ -1,0 +1,58 @@
+{
+  "apartmentList": [
+    {
+      "id": 1,
+      "brough": "Queens",
+      "name": "Woody",
+      "image": "http://www.pngmart.com/files/3/Toy-Story-Woody-PNG-Photos.png",
+      "likes": 8,
+      "review": [{"rating": 7, "comment": "big space, view sucks"}],
+      "address": ""
+    },
+    {
+      "id": 2,
+      "brough": "Bronx",
+      "name": "Woody",
+      "image": "http://www.pngmart.com/files/3/Toy-Story-Woody-PNG-Photos.png",
+      "likes": 8,
+      "review": [{"rating": 7, "comment": "big space, view sucks"}],
+      "address": ""
+    },
+    {
+      "id": 3,
+      "brough": "Manhattan",
+      "name": "Woody",
+      "image": "http://www.pngmart.com/files/3/Toy-Story-Woody-PNG-Photos.png",
+      "likes": 8,
+      "review": [{"rating": 7, "comment": "big space, view sucks"}],
+      "address": ""
+    },
+    {
+      "id": 4,
+      "brough": "Staten Island",
+      "name": "Woody",
+      "image": "http://www.pngmart.com/files/3/Toy-Story-Woody-PNG-Photos.png",
+      "likes": 8,
+      "review": [{"rating": 7, "comment": "big space, view sucks"}],
+      "address": ""
+    },
+    {
+      "id": 5,
+      "brough": "Brooklyn",
+      "name": "Woody",
+      "image": "http://www.pngmart.com/files/3/Toy-Story-Woody-PNG-Photos.png",
+      "likes": 8,
+      "review": [{"rating": 7, "comment": "big space, view sucks"}],
+      "address": ""
+    },
+    {
+      "id": 6,
+      "brough": "Brooklyn",
+      "name": "Woody",
+      "image": "http://www.pngmart.com/files/3/Toy-Story-Woody-PNG-Photos.png",
+      "likes": 8,
+      "review": [{"rating": 7, "comment": "big space, view sucks"}],
+      "address": ""
+    }
+  ]
+}
