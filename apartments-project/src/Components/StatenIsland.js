@@ -1,9 +1,14 @@
 import React from "react";
+import { BroughListing, DisplayApartmentListing, SubmitApartmentListing } from "./Apartment";
 
 export const StatenIsland = () => {
-    return (
+    const brough = "StatenIsland";
+    
+    return(
         <div>
-            <h3>owo</h3>
+            <BroughListing
+                brough={brough}
+            />
         </div>
     )
 }
