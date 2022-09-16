@@ -1,10 +1,63 @@
 import React, { useEffect, useState } from "react"
 import {v4 as uuid} from "uuid"
+import Button from 'react-bootstrap/Button';
 
+// Add like button on each apartment listing      
+
+export function DisplayApartment({ apartment, newApartment }) {
+    const [listing, setListing] = useState(apartment);
+
+    // useEffect(() => {
+    //     setListing(apartment)
+    // }, [apartment])
+
+    const handleLikeClick = (event, obj) => {
+        console.log('handleClick', obj);
+
+        obj.likes++;
+
+        fetch(`http://localhost:8085/apartmentList/${obj.id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(obj)
+        }).then( () => {
+            setListing(obj)
+            newApartment(obj);
+        });
+
+    }
+
+    return (
+        <div>
+            <div key={listing.id}>
+                <div>{listing.brough}</div>
+                <div>{listing.name}</div>
+                <div>{listing.image}</div>
+                <div>{listing.likes}
+                    <Button 
+                        variant="outline-primary" 
+                        onClick={ (event) => {handleLikeClick(event, listing)}}
+                    >
+                        Like
+                    </Button>
+                </div>
+                <div>{listing.review.rating} - {listing.review.comment}</div>
+                <div>{listing.address}</div>
+            </div>
+        </div>
+    );
+}
+      
 export function DisplayApartmentListing({ list, brough }) {
     const [apartmentList, setApartmentList] = useState([]);
     
     useEffect(() => {
+        filterList(list)
+    }, [list, brough]);
+
+    const filterList = (list) => {
         let broughList = list.filter(apartment => {
             if (apartment.brough == brough) {
                 return apartment;
@@ -12,31 +65,33 @@ export function DisplayApartmentListing({ list, brough }) {
         })
 
         setApartmentList(broughList);
-    }, [list, brough]);
-    
-    const displayApartmentList = (list) => {
-        let output = [];
-        list.forEach(apartment => {
-            output.push(
-                <div key={apartment.id}>
-                    <div>{apartment.brough}</div>
-                    <div>{apartment.name}</div>
-                    <div>{apartment.image}</div>
-                    <div>{apartment.likes}</div>
-                    <div>{apartment.review.rating} - {apartment.review.comment}</div>
-                    <div>{apartment.address}</div>
-                </div>
-            )
+    }
+
+    const updateApartment = (obj) => {
+        console.log(obj)
+        let newList = [];
+        apartmentList.forEach(element => {
+            if (element.id == obj.id) {
+                element = obj;
+            }
+
+            newList.push(element)
         });
 
-        console.log(output);
-
-        return output;
+        setApartmentList(newList)
     }
 
     return (
         <div>
-            {displayApartmentList(apartmentList)}
+            ({apartmentList.map(apartment => {
+                return (
+                    <DisplayApartment
+                        key={apartment.id}
+                        apartment={apartment}
+                        newApartment={updateApartment}
+                    />
+                )
+            })})
         </div>
     )
 }
@@ -76,8 +131,6 @@ export function SubmitApartmentListing({addNewListing, brough}) {
 
 export function BroughListing({ brough }) {
     const [apartmentList, setApartmentList] = useState([]);
-    const [filterText, setFilterText] = useState("");
-
 
     useEffect(() => {
         fetch("http://localhost:8085/apartmentList")
@@ -107,7 +160,7 @@ export function BroughListing({ brough }) {
                 brough={brough}
             />
             <SubmitApartmentListing 
-                addNewListing={addNewApartment} 
+                addNewListing={addNewApartment}
                 brough={brough}
             />
         </div>
